@@ -76,7 +76,7 @@ def add_to_database(data, package_name, form):
                    transporting=int(data['transporting']), publish=int(data['permission_to_publish']))
     db.session.add(order)
     db.session.commit()
-    send_email()
+    #send_email()
 
 def send_email():
     smtpObj = smtplib.SMTP('mail.weddingprice.ru', 465)
