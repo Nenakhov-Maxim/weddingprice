@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/reset.css')}}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/unitegallery/css/unite-gallery.css')}}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/media.css')}}">
+  <title>{{ title }}</title>
+</head>
+<body>
+ <div class="container">  
+  <section class="main-menu">
+    <div class="main-menu__container">
+      <div class="title-wrapper">
+        <div class="main-menu__title-mini">
+          <img src="{{ url_for('static', filename='img/menu-mini.svg')}}" alt="">          
+        </div>
+        <p>меню</p>        
+          
+      </div>
+      <div class="main-menu__title">
+        <p>меню</p> 
+      </div>      
+      <div class="main-menu__inner">
+        <ul class="main-menu__list-menu">
+          <li class="main-menu__menu-item" id="main"><a href="#index" class="menu-active">Главная</a></li>
+          <li class="main-menu__menu-item" id="photo-price"><a href="#photo">Цены на фотосъемку</a></li>
+          <li class="main-menu__menu-item" id="video-price"><a href="#video">Цены на видеосъемку</a></li>
+          <li class="main-menu__menu-item" id="photo-video-price"><a href="#photo-video">Цены на фото + видео</a></li>
+          <li class="main-menu__menu-item" id="to-gallery"><a href="#gallery">Примеры работ</a></li>
+          <li class="main-menu__menu-item" id="contact"><a href="#contacts">Контакты</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div class="content">
+    <section class="header" id="index">
+      <div class="header-quote">
+        Ловлю мгновения. Сохраняю воспоминания. Тепло. Уютно. Навсегда.
+      </div>
+    </section>
+    <section class="photo-price" id="photo">
+      <div class="photo-price__title-container">
+        <h2 class="photo-price__title">Цены на фотосъемку</h2>
+        <p class="photo-price__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio feugiat turpis in eu, convallis ullamcorper libero aenean eros.
+          Netus mi diam varius nam imperdiet facilisi vulputate. Tortor integer feugiat viverra non. Sem quis scelerisque egestas aliquam.</p>
+      </div>
+      <div class="photo-price__package mini">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">
+            <div class="package__content-title">Пакет Mini</div>
+            <div class="package__content-services">
+              <ul class="content-services__list-item">
+                <li class="content-services__item">Консультация</li>
+                <li class="content-services__item">Помощь в создании образа</li>
+                <li class="content-services__item">Работа 5 часов</li>
+                <li class="content-services__item">Обработка 200+ фото</li>
+                <li class="content-services__item">Печать 20 фото</li>
+                <li class="content-services__item">Готовность 4 недели</li>
+              </ul>
+            </div>
+            <div class="package__content-price">Стоимость {{ base_price_photo[0] }} ₽</div>
+
+            <button class="package__content-order" data-package="photo,mini"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='photo-mini') }}" href="#">записаться</a></button>
+          </div>
+        </div>
+      </div>
+      <div class="photo-price__package standart">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">           
+              <div class="package__content-title">Пакет Standart</div>
+              <div class="package__content-services">
+                <ul class="content-services__list-item">
+                  <li class="content-services__item">Консультация</li>
+                  <li class="content-services__item">Помощь в создании образа</li>
+                  <li class="content-services__item">Работа 10 часов</li>
+                  <li class="content-services__item">Обработка 500+ фото</li>
+                  <li class="content-services__item">Печать 30 фото</li>
+                  <li class="content-services__item">Готовность 4 недели</li>
+                </ul>
+              </div>
+              <div class="package__content-price">Стоимость {{ base_price_photo[1] }} ₽</div>
+              <button class="package__content-order" data-package="photo,standart"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='photo-standart') }}" href="#">записаться</a></button>
+          </div>          
+        </div>
+      </div>
+      <div class="photo-price__package full-day">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">
+            <div class="package__content-title">Пакет Full day</div>
+            <div class="package__content-services">
+              <ul class="content-services__list-item">
+                <li class="content-services__item">Консультация</li>
+                <li class="content-services__item">Помощь в создании образа</li>
+                <li class="content-services__item">Работа 15 часов</li>
+                <li class="content-services__item">Обработка 800+ фото</li>
+                <li class="content-services__item">Печать 50 фото</li>
+                <li class="content-services__item">Готовность 3 недели</li>
+              </ul>
+            </div>
+            <div class="package__content-price">Стоимость {{ base_price_photo[2] }} ₽</div>
+            <button class="package__content-order" data-package="photo,full-day"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='photo-fullday') }}" href="#">записаться</a></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="video-price" id="video">
+      <div class="photo-price__title-container">
+        <h2 class="photo-price__title">Цены на видеосъемку</h2>
+        <p class="photo-price__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio feugiat turpis in eu, convallis ullamcorper libero aenean eros.
+          Netus mi diam varius nam imperdiet facilisi vulputate. Tortor integer feugiat viverra non. Sem quis scelerisque egestas aliquam.</p>
+      </div>
+      <div class="photo-price__package mini">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">
+            <div class="package__content-title">Пакет Mini</div>
+            <div class="package__content-services">
+              <ul class="content-services__list-item">
+                <li class="content-services__item">Консультация</li>
+                <li class="content-services__item">Помощь в создании образа</li>
+                <li class="content-services__item">Работа 5 часов</li>
+                <li class="content-services__item">Обработка 200+ фото</li>
+                <li class="content-services__item">Печать 20 фото</li>
+                <li class="content-services__item">Готовность 4 недели</li>
+              </ul>
+            </div>
+            <div class="package__content-price">Стоимость {{ base_price_video[0] }} ₽</div>
+            <button class="package__content-order" data-package="video,mini"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='video-mini') }}" href="#">записаться</a></button>
+          </div>
+        </div>
+      </div>
+      <div class="photo-price__package standart">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">            
+            <div class="package__content-title">Пакет Standart</div>
+            <div class="package__content-services">
+              <ul class="content-services__list-item">
+                <li class="content-services__item">Консультация</li>
+                <li class="content-services__item">Помощь в создании образа</li>
+                <li class="content-services__item">Работа 10 часов</li>
+                <li class="content-services__item">Обработка 500+ фото</li>
+                <li class="content-services__item">Печать 30 фото</li>
+                <li class="content-services__item">Готовность 4 недели</li>
+              </ul>
+            </div>
+            <div class="package__content-price">Стоимость {{base_price_video[1]}} ₽</div>
+            <button class="package__content-order" data-package="video,standart"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='video-standart') }}" href="#">записаться</a></button>
+          </div>
+          
+        </div>
+      </div>
+      <div class="photo-price__package full-day">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">
+            <div class="package__content-title">Пакет Full day</div>
+            <div class="package__content-services">
+              <ul class="content-services__list-item">
+                <li class="content-services__item">Консультация</li>
+                <li class="content-services__item">Помощь в создании образа</li>
+                <li class="content-services__item">Работа 15 часов</li>
+                <li class="content-services__item">Обработка 800+ фото</li>
+                <li class="content-services__item">Печать 50 фото</li>
+                <li class="content-services__item">Готовность 3 недели</li>
+              </ul>
+            </div>
+            <div class="package__content-price">Стоимость {{ base_price_video[2] }} ₽</div>
+            <button class="package__content-order" data-package="video,full-day"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='video-fullday') }}" href="#">записаться</a></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="photo-video-price" id="photo-video">
+      <div class="photo-price__title-container">
+        <h2 class="photo-price__title">Цены на фото + видеосъемку</h2>
+        <p class="photo-price__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio feugiat turpis in eu, convallis ullamcorper libero aenean eros.
+          Netus mi diam varius nam imperdiet facilisi vulputate. Tortor integer feugiat viverra non. Sem quis scelerisque egestas aliquam.</p>
+      </div>
+      <div class="photo-price__package mini">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">
+            <div class="package__content-title">Пакет Mini</div>
+            <div class="package__content-services">
+              <ul class="content-services__list-item">
+                <li class="content-services__item">Консультация</li>
+                <li class="content-services__item">Помощь в создании образа</li>
+                <li class="content-services__item">Работа 5 часов</li>
+                <li class="content-services__item">Обработка 200+ фото</li>
+                <li class="content-services__item">Печать 20 фото</li>
+                <li class="content-services__item">Готовность 4 недели</li>
+              </ul>
+            </div>
+            <div class="package__content-price">Стоимость {{ base_price_photo_video[0] }} ₽</div>
+            <button class="package__content-order" data-package="photo+video,mini"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='photo+video-mini') }}" href="#">записаться</a></button>
+          </div>
+        </div>
+      </div>
+      <div class="photo-price__package standart">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">            
+            <div class="package__content-title">Пакет Standart</div>
+            <div class="package__content-services">
+              <ul class="content-services__list-item">
+                <li class="content-services__item">Консультация</li>
+                <li class="content-services__item">Помощь в создании образа</li>
+                <li class="content-services__item">Работа 10 часов</li>
+                <li class="content-services__item">Обработка 500+ фото</li>
+                <li class="content-services__item">Печать 30 фото</li>
+                <li class="content-services__item">Готовность 4 недели</li>
+              </ul>
+            </div>
+            <div class="package__content-price">Стоимость {{ base_price_photo_video[1] }} ₽</div>
+            <button class="package__content-order" data-package="photo+video,standart"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='photo+video-standart') }}" href="#">записаться</a></button>
+          </div>          
+        </div>
+      </div>
+      <div class="photo-price__package full-day">
+        <div class="package__container">
+          <div class="package__photo"></div>
+          <div class="package__content">
+            <div class="package__content-title">Пакет Full day</div>
+            <div class="package__content-services">
+              <ul class="content-services__list-item">
+                <li class="content-services__item">Консультация</li>
+                <li class="content-services__item">Помощь в создании образа</li>
+                <li class="content-services__item">Работа 15 часов</li>
+                <li class="content-services__item">Обработка 800+ фото</li>
+                <li class="content-services__item">Печать 50 фото</li>
+                <li class="content-services__item">Готовность 3 недели</li>
+              </ul>
+            </div>
+            <div class="package__content-price">Стоимость {{ base_price_photo_video[2] }} ₽</div>
+            <button class="package__content-order" data-package="photo+video,full-day"><a class="edit-modal-opener" data-toggle="modal"
+                            data-whatever="{{ url_for('modal', id='photo+video-fullday') }}" href="#">записаться</a></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="gallery" style="display:none;">		
+      <img alt="Image 1 Title" src="{{ url_for('static', filename='img/pic1.jpg')}}"
+        data-image="{{ url_for('static', filename='img/pic1.jpg')}}"
+        data-description="Image 1 Description">        
+      <img alt="Image 2 Title" src="{{ url_for('static', filename='img/pic1.jpg')}}"
+        data-image="{{ url_for('static', filename='img/pic1.jpg')}}"
+        data-description="Image 2 Description">
+      <img alt="Youtube With Images"
+        data-type="youtube"
+        src="{{ url_for('static', filename='img/pic1.jpg')}}"
+        data-image="{{ url_for('static', filename='img/pic1.jpg')}}"		 
+        data-videoid="a9qjA1g20VY"
+        data-description="Youtube video description">        
+    </section>                 
+    <section class="contact" id="contacts">
+      <div class="contact__content">
+        <div class="photo-price__title-container">
+          <h2 class="photo-price__title">Контакты</h2>        
+        </div>
+        <div class="contact__phone">
+          <ul class="phone-list">
+            <li class="phone-list__item"><a href="tel:+79517816582">+7(814)-233-22-11</a></li>
+            <li class="phone-list__item"><a href="tel:+79517816582">+7(814)-233-22-11</a></li> 
+          </ul>              
+        </div>
+        <div class="contact__vk">
+          <ul class="vk-list">
+            <li class="vk-list__item"><p class="vk">VK</p><a href="http://vk.com">http://vk.com</a></li>
+            <li class="vk-list__item"><p class="vk">VK</p><a href="http://vk.com">http://vk.com</a></li>
+          </ul>
+        </div>
+        <div class="contact__img img-bottom">
+          <picture>
+            <source media="(max-width: 799px)" srcset="{{ url_for('static', filename='img/img_bottom_phone.png')}}">
+            <source media="(min-width: 800px)" srcset="{{ url_for('static', filename='img/contact_photo_bottom.png')}}">
+            <img src="{{ url_for('static', filename='img/contact_photo_bottom.png')}}" alt="Контакты">
+           </picture>         
+        </div>
+      </div>
+      <div class="contact__img img-right">
+        <img src="{{ url_for('static', filename='img/contact_photo_right.png')}}" alt="Контакты" srcset="">
+      </div>     
+    </section>
+  </div>  
+ </div>
+ <div class="order-form" id="Modal" tabindex="-1" role="dialog" aria-labelledby="FormModal" aria-hidden="true">
+  <div class="order-form__container">
+  </div>
+</div>
+ href="{{ url_for('static', filename='css/style.css')}}"
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+<script type='text/javascript' src="{{ url_for('static', filename='css/unitegallery/js/unitegallery.min.js')}}"></script>
+<script type='text/javascript' src="{{ url_for('static', filename='css/unitegallery/themes/tiles/ug-theme-tiles.js')}}"></script>
+<script type="text/javascript">			
+      jQuery("#gallery").unitegallery({
+          gallery_theme:"tiles",
+					tiles_type:"justified",
+					tile_border_color:"#F0F0F0",
+					tile_outline_color:"#8B8B8B",
+					tile_enable_shadow:true,
+					tile_shadow_color:"#8B8B8B",
+					tile_show_link_icon:true,
+					lightbox_textpanel_title_color:"e5e5e5",
+					theme_gallery_padding:20,
+					tiles_justified_space_between:50,
+					tiles_justified_row_height:600,
+          gallery_width:"100%",          
+
+			});   
+</script>
+<script src="{{ url_for('static', filename='js/index.js')}}"></script>
+</body>
+</html>
