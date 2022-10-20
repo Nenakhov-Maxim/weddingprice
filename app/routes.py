@@ -1,5 +1,3 @@
-render_template('index.html', title='Wedding Photographer', base_price_photo=[17000, 15000, 25000],
-                           base_price_video=[17000, 15000, 25000], base_price_photo_video=[17000, 15000, 25000])
 import json
 from flask import render_template, url_for, redirect, flash, jsonify, request
 from app.forms import file_list_form_builder
