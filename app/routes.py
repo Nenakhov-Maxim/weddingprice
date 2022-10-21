@@ -34,6 +34,7 @@ def index():
 
 @application.route('/index/<id>/order', methods=['GET', 'POST'])
 def modal(id):
+    print(id)
     filling_modal = Package.query.filter_by(package_name=id).first()
     services_base = filling_modal.base_service.split(';')
     additional_services = []
@@ -76,6 +77,7 @@ def add_to_database(data, package_name, form):
     db.session.add(order)
     db.session.commit()
     send_email(data, package_name, add_services)
+
 
 def send_email(data, package_name, add_services):
     msg = f'''

@@ -152,24 +152,23 @@ window.addEventListener('resize', ()=>{
 
 //Открытие и работа модального окна
 
-$(document).ready(function () {
+$(document).ready(function (e) {
     $('.edit-modal-opener').click(function () {
+        
         var url = $(this).data('whatever');
         $.get(url, function (data) {
+          $('#Modal .order-form__container').html('');
             $('#Modal .order-form__container').html(data);
             $('#Modal').addClass('active');
             $('.close-form').click(function () {
                 $('#Modal').removeClass('active');
-                location.reload();
+                
             });
         $('.form-button').click(function (event) {
                 event.preventDefault();
                 $.post(url, data = $('.order-form__value').serialize(), function (
-                    data) {
-                    console.log(data)
-                    var f_inp = $('.form-input');
-                    console.log(f_inp)
-                    console.log(f_inp.length)
+                    data) {                 
+                    var f_inp = $('.form-input');                 
                     for (let i = 0; i < f_inp.length; i++) {
                       f_inp[i].classList.remove('has-error');
                     }
@@ -183,7 +182,6 @@ $(document).ready(function () {
                             if (obj.hasOwnProperty(key)) {
                                 var value = obj[key];
                             }
-
                             $('<p class="help-block">' + value + '</p>')
                             .insertBefore('#' + key);
                             $('#' + key).addClass('has-error')
@@ -196,6 +194,9 @@ $(document).ready(function () {
     });
 });
 
+$('.package__content-order').click(function(event){
+  event.preventDefault()
+})
 // Скрытие меню при клике в другую область на небольших экранах
 
 $(document).on('mousedown touchstart', function (e) {
