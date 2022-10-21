@@ -118,7 +118,8 @@
 
   .img-bottom img {
     height: auto;
-    width: 550px;
+    width: calc(350px + (550 - 350) * ((100vw - 370px) / (799 - 370)));
+    min-width: 350px;
   }
   
 
@@ -218,7 +219,15 @@
 
   .contact__vk  {
     margin-top: 30px;
-  }  
+  }
+  .form-title {
+    font-size: calc(25px + (35 - 25) * ((100vw - 370px) / (639 - 370)));
+    line-height: calc(40px + (69 - 40) * ((100vw - 370px) / (639 - 370)));
+    margin-bottom: calc(10px + (60 - 10) * ((100vw - 370px) / (800 - 370)));
+  }
+  .order-form__value h3 {
+    line-height: calc(25px + (69 - 25) * ((100vw - 370px) / (800 - 370)));
+  } 
 }
 
 @media (max-width: 440px) {
