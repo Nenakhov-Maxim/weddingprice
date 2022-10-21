@@ -3,7 +3,8 @@ from flask import render_template, url_for, redirect, flash, jsonify, request
 from app.forms import file_list_form_builder
 from app import application, db
 from app.models import Package, AdditionalServices, Orders
-import smtplib
+from app.send_mail import SendMail
+
 
 @application.shell_context_processor
 def make_shell_context():
@@ -63,27 +64,32 @@ def modal(id):
                            add_prices=add_services_price)
 
 def add_to_database(data, package_name, form):
-    print(data, package_name)
     add_services = ''
     for item in data.items():
         if item[0].find('filename') != -1 and item[1] != False:
-            add_services = add_services + form[item[0]].label.text + ';'
-
-    print(add_services)
+            add_services = add_services + form[item[0]].label.text + ';' + '\n'
 
     order = Orders(package_name=package_name, add_services=add_services, name=data['username'], phone=data['phone'],
                    wed_date=data['wedding_date'], comments=data['comments'], results_storage=int(data['result_storage']),
                    transporting=int(data['transporting']), publish=int(data['permission_to_publish']))
     db.session.add(order)
     db.session.commit()
-    #send_email()
+    send_email(data, package_name, add_services)
 
-def send_email():
-    smtpObj = smtplib.SMTP('mail.weddingprice.ru', 465)
-    smtpObj.starttls()
-    smtpObj.login('order@weddingprice.ru', '55369100Max')
-    msg = '''
-        Проверка связи
+def send_email(data, package_name, add_services):
+    msg = f'''
+    У вас новый заказ на сайте WeddingPrice.ru
+    -------------------------------------------
+    * Имя пакета: {package_name};
+    * Дополнительные услуги, выбранные по желанию:
+        {add_services};
+    * Дата свадьбы: {data['wedding_date']};
+    * Хранение результатов: {'1 месяц' if data['result_storage'] == '0' else 'бессрочное хранение'}
+    * Перемещение: {'молодожены предоставляют машину' if data['transporting'] == '0' else 'фотограф перемещается на своей машине'}  
+    * Разрешение на публикацию: {'не разрешаю' if data['permission_to_publish'] == '0' else 'разрешаю'}
+    * Комментарий к заказу: {data['comments']}  
+    -------------------------------------------
+    КОНТАКТЫ:
+    {data['username']} - {data['phone']}
     '''
-    smtpObj.sendmail('order@weddingprice.ru', 'Nenakhov.Max@yandex.ru', msg)
-    smtpObj.quit()
+    SendMail(msg)
