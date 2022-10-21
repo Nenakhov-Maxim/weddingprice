@@ -1,9 +1,10 @@
 import json
+import smtplib
 from flask import render_template, url_for, redirect, flash, jsonify, request
 from app.forms import file_list_form_builder
 from app import application, db
 from app.models import Package, AdditionalServices, Orders
-from app.send_mail import SendMail
+
 
 
 @application.shell_context_processor
@@ -92,4 +93,13 @@ def send_email(data, package_name, add_services):
     КОНТАКТЫ:
     {data['username']} - {data['phone']}
     '''
-    SendMail(msg)
+
+    HOST = "mail.weddingprice.ru"
+    SUBJECT = 'Поступил новый заказ через форму сайта'
+    TO = 'Nenakhov.Max@yandex.ru'
+    FROM = 'order@weddingprice.ru'
+    BODY = '\r\n'.join(("From: %s" % FROM, "To: %s" % TO, "Subject: %s" % SUBJECT, "", msg))
+    server = smtplib.SMTP(HOST)
+    server.login('order@weddingprice.ru', "55369100Max")
+    server.sendmail(FROM, [TO], BODY.encode('utf-8'))
+    server.quit()
