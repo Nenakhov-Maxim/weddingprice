@@ -4,6 +4,7 @@ from flask import render_template, url_for, redirect, flash, jsonify, request
 from app.forms import file_list_form_builder
 from app import application, db
 from app.models import Package, AdditionalServices, Orders
+import os
 
 
 
@@ -29,8 +30,22 @@ def index():
     for row in base_price_photo_video_row:
         base_price_photo_video.append(row[0])
 
+    photo_path = os.getcwd() + "/app/static/gallery/photo"
+    video_path = os.getcwd() + "/app/static/gallery/video"
+    list_of_photo = {}
+    list_of_video = {}
+    for filename in os.listdir(photo_path):
+        list_of_photo[filename] = "gallery/photo/" + filename
+    for filename in os.listdir(video_path):
+        alt = filename.split(',')[0]
+        url_code = filename.split(',')[1][:-4].strip()
+        list_of_video[url_code] = ["gallery/video/" + filename, alt]
+    print(list_of_video)
+
+
     return render_template('index.html', title='Wedding Photographer', base_price_photo=base_price_photo,
-                           base_price_video=base_price_video, base_price_photo_video=base_price_photo_video)
+                           base_price_video=base_price_video, base_price_photo_video=base_price_photo_video,
+                           photo=list_of_photo, video=list_of_video)
 
 @application.route('/index/<id>/order', methods=['GET', 'POST'])
 def modal(id):

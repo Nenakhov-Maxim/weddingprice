@@ -107,7 +107,7 @@
 
 .header {    
   height: 100vh;
-  background-image: url('../img/header-bck.png');
+  background-image: url('../img/header-bck-1440px.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -183,13 +183,12 @@
   width: calc(211px + 310 * (100vw / 1440));
   max-width: 521px;
   max-height: 738px;
-  background-image: url(../img/photo-mini.png);
-  /* border-radius: 0 0 75% 0; */
   background-repeat: no-repeat;
   background-clip: content-box;  
   background-size: contain;
-  
 }
+
+
 
 .package__content {
   margin-right: calc(3px + 60 * (100vw / 1440));
@@ -267,9 +266,43 @@
   text-align: left;
 }
 
-.standart .package__photo {
-  background-image: url(../img/photo-standart.png);
+#photo .mini .package__photo {
+    background-image: url(../img/photo-mini.jpg);
+}
+
+#photo .standart .package__photo {
+  background-image: url(../img/photo-standart.jpg);
   border-radius: 0 0 0 75%;  
+}
+
+#photo .full-day .package__photo {
+  background-image: url(../img/photo-fullday.jpg);
+}
+
+#video .mini .package__photo {
+    background-image: url(../img/video-mini.jpg);
+}
+
+#video .standart .package__photo {
+  background-image: url(../img/video-standart.jpg);
+  border-radius: 0 0 0 75%;
+}
+
+#video .full-day .package__photo {
+  background-image: url(../img/video-fullday.jpg);
+}
+
+#photo-video .mini .package__photo {
+    background-image: url(../img/photo+video-mini.jpg);
+}
+
+#photo-video .standart .package__photo {
+  background-image: url(../img/photo+video-standart.jpg);
+  border-radius: 0 0 0 75%;
+}
+
+#photo-video .full-day .package__photo {
+  background-image: url(../img/photo+video-fullday.jpg);
 }
 
 .standart .package__content-services {
@@ -277,12 +310,23 @@
   margin-left: 5vw;
 }
 
-.full-day .package__photo {
-  background-image: url(../img/photo-full-day.png);
-}
-
 .photo-video-price  {
   margin-bottom: calc(50px + 84 * (100vw / 1440));
+}
+
+.gallery-title {
+  padding: 0 5px 45px 5px;
+  font-style: normal;
+  font-weight: 800;
+  font-size: calc(30px + 30 * (100vw / 1440));
+  line-height: 69px;
+  color: #AA8D78;
+  margin: 0 auto;
+}
+
+
+#gallery-photo {
+    margin-bottom: calc(50px + 84 * (100vw / 1440));
 }
 
 .contact {

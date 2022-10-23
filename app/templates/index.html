@@ -31,7 +31,8 @@
           <li class="main-menu__menu-item" id="photo-price"><a href="#photo">Цены на фотосъемку</a></li>
           <li class="main-menu__menu-item" id="video-price"><a href="#video">Цены на видеосъемку</a></li>
           <li class="main-menu__menu-item" id="photo-video-price"><a href="#photo-video">Цены на фото + видео</a></li>
-          <li class="main-menu__menu-item" id="to-gallery"><a href="#gallery">Примеры работ</a></li>
+          <li class="main-menu__menu-item" id="to-gallery-photo"><a href="#gallery-photo">Примеры фото работ</a></li>
+          <li class="main-menu__menu-item" id="to-gallery-video"><a href="#gallery-video">Примеры видео работ</a></li>
           <li class="main-menu__menu-item" id="contact"><a href="#contacts">Контакты</a></li>
         </ul>
       </div>
@@ -46,8 +47,15 @@
     <section class="photo-price" id="photo">
       <div class="photo-price__title-container">
         <h2 class="photo-price__title">Цены на фотосъемку</h2>
-        <p class="photo-price__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio feugiat turpis in eu, convallis ullamcorper libero aenean eros.
-          Netus mi diam varius nam imperdiet facilisi vulputate. Tortor integer feugiat viverra non. Sem quis scelerisque egestas aliquam.</p>
+
+        <ul class="photo-price__text">
+          <li>* Предсвадебная консультация. Помощь в планировании свадебного дня;</li>
+          <li>* Составление тайминга дня, составление маршрута прогулки (при необходимости);</li>
+          <li>* Цветокоррекция всех фотографий;</li>
+          <li>* Ретушь всех крупных портретов молодожёнов;</li>
+          <li>* Анонс фотографий в сети Интернет: 5-10 обработанных фотографий в течение 2 дней после свадьбы;</li>
+          <li>* Предоставление фотостудии для съемки.</li>
+        </ul>
       </div>
       <div class="photo-price__package mini">
         <div class="package__container">
@@ -117,8 +125,12 @@
     <section class="video-price" id="video">
       <div class="photo-price__title-container">
         <h2 class="photo-price__title">Цены на видеосъемку</h2>
-        <p class="photo-price__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio feugiat turpis in eu, convallis ullamcorper libero aenean eros.
-          Netus mi diam varius nam imperdiet facilisi vulputate. Tortor integer feugiat viverra non. Sem quis scelerisque egestas aliquam.</p>
+        <ul class="photo-price__text">
+          <li>* Предсвадебная консультация. Помощь в планировании свадебного дня;</li>
+          <li>* Монтаж;</li>
+          <li>* Цветокоррекция;</li>
+          <li>* Запись качественного звука с микрофона ведущего во время  банкета и выездной регистрации (при возможности диджея).</li>
+        </ul>
       </div>
       <div class="photo-price__package mini">
         <div class="package__container">
@@ -188,8 +200,16 @@
     <section class="photo-video-price" id="photo-video">
       <div class="photo-price__title-container">
         <h2 class="photo-price__title">Цены на фото + видеосъемку</h2>
-        <p class="photo-price__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio feugiat turpis in eu, convallis ullamcorper libero aenean eros.
-          Netus mi diam varius nam imperdiet facilisi vulputate. Tortor integer feugiat viverra non. Sem quis scelerisque egestas aliquam.</p>
+        <ul class="photo-price__text">
+          <li>* Предсвадебная консультация. Помощь в планировании свадебного дня</li>
+          <li>* Составление тайминга дня, составление маршрута прогулки (при необходимости)</li>
+          <li>* Запись качественного звука с микрофона ведущего во время  банкета и выездной регистрации (при возможности диджея)</li>
+          <li>* Монтаж видео</li>
+          <li>* Цветокоррекция  видео и фотографий</li>
+          <li>* Ретушь всех крупных портретов молодожёнов на фото</li>
+          <li>* Анонс фотографий в сети Интернет: 5-10 обработанных фотографий в течение 2 дней после свадьбы</li>
+          <li>* Предоставление фотостудии для съемки (в подарок)</li>
+        </ul>
       </div>
       <div class="photo-price__package mini">
         <div class="package__container">
@@ -255,20 +275,26 @@
         </div>
       </div>
     </section>
-    <section id="gallery" style="display:none;">		
-      <img alt="Image 1 Title" src="{{ url_for('static', filename='img/pic1.jpg')}}"
-        data-image="{{ url_for('static', filename='img/pic1.jpg')}}"
-        data-description="Image 1 Description">        
-      <img alt="Image 2 Title" src="{{ url_for('static', filename='img/pic1.jpg')}}"
-        data-image="{{ url_for('static', filename='img/pic1.jpg')}}"
-        data-description="Image 2 Description">
-      <img alt="Youtube With Images"
+    <h2 class="gallery-title">Примеры фото работ</h2>
+    <section id="gallery-photo" style="display:none;">
+    {% for key,value in photo.items() %}
+      <img alt="Свадебное фото {{ key }}"
+        src="{{ url_for('static', filename=value) }}"
+        data-image="{{ url_for('static', filename=value) }}"
+        data-description="Свадебное фото {{ key }}">
+     {% endfor %}
+    </section>
+    <h2 class="gallery-title">Примеры видео работ</h2>
+    <section id="gallery-video" style="display:none;">
+      {% for key, value in video.items() %}
+      <img alt="{{ value[1] }}"
         data-type="youtube"
-        src="{{ url_for('static', filename='img/pic1.jpg')}}"
-        data-image="{{ url_for('static', filename='img/pic1.jpg')}}"		 
-        data-videoid="a9qjA1g20VY"
-        data-description="Youtube video description">        
-    </section>                 
+        src="{{ url_for('static', filename=value[0]) }}"
+        data-image="{{ url_for('static', filename=value[0]) }}"
+        data-videoid="{{ key }}"
+        data-description="{{ value[1] }}">
+      {% endfor %}
+    </section>
     <section class="contact" id="contacts">
       <div class="contact__content">
         <div class="photo-price__title-container">
@@ -276,14 +302,14 @@
         </div>
         <div class="contact__phone">
           <ul class="phone-list">
-            <li class="phone-list__item"><a href="tel:+79517816582">+7(814)-233-22-11</a></li>
-            <li class="phone-list__item"><a href="tel:+79517816582">+7(814)-233-22-11</a></li> 
+            <li class="phone-list__item"><a href="tel:+79127769862">+7(912)-776-98-62 - Татьяна</a></li>
+            <li class="phone-list__item"><a href="tel:+79517816582">+7(951)-781-65-82 - Анастасия</a></li>
           </ul>              
         </div>
         <div class="contact__vk">
           <ul class="vk-list">
-            <li class="vk-list__item"><p class="vk">VK</p><a href="http://vk.com">http://vk.com</a></li>
-            <li class="vk-list__item"><p class="vk">VK</p><a href="http://vk.com">http://vk.com</a></li>
+            <li class="vk-list__item"><p class="vk">VK</p><a href="https://vk.com/poto71">Татьяна</a></li>
+            <li class="vk-list__item"><p class="vk">VK</p><a href="https://vk.com/trg1101">Анастасия</a></li>
           </ul>
         </div>
         <div class="contact__img img-bottom">
@@ -308,21 +334,36 @@
 <script type='text/javascript' src="{{ url_for('static', filename='css/unitegallery/js/unitegallery.min.js')}}"></script>
 <script type='text/javascript' src="{{ url_for('static', filename='css/unitegallery/themes/tiles/ug-theme-tiles.js')}}"></script>
 <script type="text/javascript">			
-      jQuery("#gallery").unitegallery({
+      jQuery("#gallery-photo").unitegallery({
           gallery_theme:"tiles",
-					tiles_type:"justified",
-					tile_border_color:"#F0F0F0",
-					tile_outline_color:"#8B8B8B",
-					tile_enable_shadow:true,
-					tile_shadow_color:"#8B8B8B",
-					tile_show_link_icon:true,
-					lightbox_textpanel_title_color:"e5e5e5",
-					theme_gallery_padding:20,
-					tiles_justified_space_between:50,
-					tiles_justified_row_height:600,
+          tiles_type:"justified",
+          tile_border_color:"#F0F0F0",
+          tile_outline_color:"#8B8B8B",
+          tile_enable_shadow:true,
+          tile_shadow_color:"#8B8B8B",
+          tile_show_link_icon:true,
+          lightbox_textpanel_title_color:"e5e5e5",
+          theme_gallery_padding:20,
+          tiles_justified_space_between:50,
+          tiles_justified_row_height:600,
           gallery_width:"100%",          
-
-			});   
+          theme_navigation_type:"arrows"
+			});
+	  jQuery("#gallery-video").unitegallery({
+          gallery_theme:"tiles",
+          tiles_type:"justified",
+          tile_border_color:"#F0F0F0",
+          tile_outline_color:"#8B8B8B",
+          tile_enable_shadow:true,
+          tile_shadow_color:"#8B8B8B",
+          tile_show_link_icon:true,
+          lightbox_textpanel_title_color:"e5e5e5",
+          theme_gallery_padding:20,
+          tiles_justified_space_between:50,
+          tiles_justified_row_height:600,
+          gallery_width:"100%",
+          theme_navigation_type:"arrows"
+			});
 </script>
 <script src="{{ url_for('static', filename='js/index.js')}}"></script>
 </body>

@@ -50,9 +50,16 @@ for (const item in menu) {
         behavior: 'smooth',
          block: 'start'});
        break;
-     case 'to-gallery':
+     case 'to-gallery-photo':
       close_menu();      
-       element = document.querySelector("#gallery");
+       element = document.querySelectorAll(".gallery-title")[0];
+       element.scrollIntoView({
+         behavior: 'smooth',
+         block: 'start'});
+       break;
+     case 'to-gallery-video':
+      close_menu();
+       element = document.querySelectorAll(".gallery-title")[1];
        element.scrollIntoView({
          behavior: 'smooth',
          block: 'start'});
