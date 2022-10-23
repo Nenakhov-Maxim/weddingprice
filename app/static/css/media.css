@@ -118,8 +118,9 @@
 
   .img-bottom img {
     height: auto;
-    width: calc(350px + (550 - 350) * ((100vw - 370px) / (799 - 370)));
-    min-width: 350px;
+    width: calc(250px + (550 - 250) * ((100vw - 370px) / (799 - 370)));
+    /*min-width: 250px;
+    */
   }
   
 

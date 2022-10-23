@@ -8,13 +8,19 @@ for (const item in menu) {
   if (Object.hasOwnProperty.call(menu, item)) {
     const menu_item = menu[item];
     menu_item.addEventListener('click', function(e){
-      e.preventDefault()      
-      scrollToElement(e.path[1])
+      event.preventDefault();
+      to_elem = e
+      if(navigator.userAgent.includes("Mac")){
+          
+          scrollToElement(e.toElement.parentElement)
+      } else {
+          scrollToElement(e.path[1])
+      }
     })
   }
 }
 // Скроллинг до необходимого блока
- function scrollToElement(e) {    
+ function scrollToElement(e) {
    switch (e.id) {
      case 'main':
       close_menu();           
@@ -166,18 +172,20 @@ $(document).ready(function (e) {
             });
         $('.form-button').click(function (event) {
                 event.preventDefault();
-                $.post(url, data = $('.order-form__value').serialize(), function (
-                    data) {                 
+                $.post(url, data = $('.order-form__value').serialize())
+                  .done(function (data) {                 
                     var f_inp = $('.form-input');                 
                     for (let i = 0; i < f_inp.length; i++) {
                       f_inp[i].classList.remove('has-error');
                     }
                     if (data.status == 'ok') {
-                        $('#Modal').removeClass('active');
+                        console.log(data.mail)
+                        $('#Modal').removeClass('active').delay( 3800 );
                         location.reload();
                     } else {
-                        $('.help-block').remove();
+                        
                         var obj = JSON.parse(data);
+                        console.log(obj)
                         for (var key in obj) {
                             if (obj.hasOwnProperty(key)) {
                                 var value = obj[key];
@@ -187,7 +195,11 @@ $(document).ready(function (e) {
                             $('#' + key).addClass('has-error')
                         }
                     }
-                })
+                  })
+                  .fail(function(xhr, status, error) {
+                    console.log(xhr, status, error)
+                });
+
             });
         })
 
@@ -201,7 +213,7 @@ $('.package__content-order').click(function(event){
 
 $(document).on('mousedown touchstart', function (e) {
     if(window.screen.width < 800){
-        event.preventDefault();
+        
         var container = $(".active_nav");
         if (container.has(e.target).length === 0){
             document.querySelector('.main-menu__inner').style.display = 'none';

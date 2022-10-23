@@ -56,13 +56,13 @@
         </ul>
       </div>
       {{ form.username.label(class_='personal-data') }}
-      {{ form.username(class_='form-input', placeholder_='Ваше имя') }}
+      {{ form.username(class_='form-input', placeholder_='Ваше имя', inputmode="text") }}
       {{ form.phone.label(class_='personal-data') }}
-      {{ form.phone(class_='form-input', placeholder_='Ваш телефон') }}
+      {{ form.phone(class_='form-input', placeholder_='Ваш телефон', inputmode="tel") }}
       {{ form.wedding_date.label(class_='personal-data') }}
-      {{ form.wedding_date(class_='form-input') }}
+      {{ form.wedding_date(class_='form-input', inputmode="date") }}
       {{ form.comments.label(class_='personal-data') }}
-      {{ form.comments(class_='order-comments', placeholder_="Комментарий к заказу") }}
+      {{ form.comments(class_='order-comments', placeholder_="Комментарий к заказу", inputmode="text") }}
       {{ form.submit(class_='form-button') }}
 </form>
 <div class="close-form">X</div>

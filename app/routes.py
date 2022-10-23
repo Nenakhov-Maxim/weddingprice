@@ -1,5 +1,5 @@
 import json
-import smtplib
+import email, smtplib, ssl
 from flask import render_template, url_for, redirect, flash, jsonify, request
 from app.forms import file_list_form_builder
 from app import application, db
@@ -34,7 +34,6 @@ def index():
 
 @application.route('/index/<id>/order', methods=['GET', 'POST'])
 def modal(id):
-    print(id)
     filling_modal = Package.query.filter_by(package_name=id).first()
     services_base = filling_modal.base_service.split(';')
     additional_services = []
@@ -77,8 +76,8 @@ def add_to_database(data, package_name, form):
     db.session.add(order)
     db.session.commit()
     send_email(data, package_name, add_services)
-
-
+    
+    
 def send_email(data, package_name, add_services):
     msg = f'''
     У вас новый заказ на сайте WeddingPrice.ru
@@ -96,12 +95,15 @@ def send_email(data, package_name, add_services):
     {data['username']} - {data['phone']}
     '''
 
-    HOST = "mail.weddingprice.ru"
+    HOST = "server152.hosting.reg.ru"
     SUBJECT = 'Поступил новый заказ через форму сайта'
-    TO = 'Nenakhov.Max@yandex.ru'
+    TO = 'nenakhov.max@yandex.ru'
     FROM = 'order@weddingprice.ru'
     BODY = '\r\n'.join(("From: %s" % FROM, "To: %s" % TO, "Subject: %s" % SUBJECT, "", msg))
-    server = smtplib.SMTP(HOST)
-    server.login('order@weddingprice.ru', "55369100Max")
-    server.sendmail(FROM, [TO], BODY.encode('utf-8'))
-    server.quit()
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(HOST, 465, context=context) as server:
+        server.login('order@weddingprice.ru', "55369100Max")
+        server.sendmail(FROM, [TO], BODY.encode('utf-8'))
+        
+    
+        
