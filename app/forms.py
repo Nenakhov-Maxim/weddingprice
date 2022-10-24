@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, SubmitField, RadioField, IntegerField, DateField, TextAreaField, FieldList
+from wtforms import StringField, BooleanField, SubmitField, RadioField, IntegerField, DateField, TextAreaField, FieldList, HiddenField
 from wtforms.validators import DataRequired
 
 class OrderForm(FlaskForm):
@@ -14,6 +14,7 @@ class OrderForm(FlaskForm):
     phone = IntegerField('Номер по которому с вами можно связаться', validators=[DataRequired()])
     wedding_date = DateField('Какая дата съемки вас интересует?', validators=[DataRequired()])
     comments = TextAreaField('')
+    hidden_price = HiddenField('price')
     submit = SubmitField('записаться')
 
 

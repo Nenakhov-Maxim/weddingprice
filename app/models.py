@@ -45,3 +45,29 @@ class Orders(db.Model):
     transporting = db.Column(db.Boolean)
     publish = db.Column(db.Boolean)
     date_order = db.Column(db.DateTime, default=datetime.utcnow())
+
+class ResultStorage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    res_storage = db.Column(db.String(1000))
+    res_price = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f'<Услуга: {self.res_storage}>,' \
+               f'<Cтоимость: {self.res_price}>'
+
+class Transporting(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text_trp = db.Column(db.String(1000))
+    trp_price = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f'<Услуга: {self.text_trp}>,' \
+               f'<Cтоимость: {self.trp_price}>'
+class Publish(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text_pub = db.Column(db.String(1000))
+    pub_price = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f'<Услуга: {self.text_pub}>,' \
+               f'<Cтоимость: {self.pub_price}>'

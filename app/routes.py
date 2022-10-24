@@ -3,7 +3,7 @@ import email, smtplib, ssl
 from flask import render_template, url_for, redirect, flash, jsonify, request
 from app.forms import file_list_form_builder
 from app import application, db
-from app.models import Package, AdditionalServices, Orders
+from app.models import Package, AdditionalServices, Orders, ResultStorage, Transporting, Publish
 import os
 
 
@@ -56,15 +56,29 @@ def index():
 def modal(id):
     filling_modal = Package.query.filter_by(package_name=id).first()
     services_base = filling_modal.base_service.split(';')
+    base_price = filling_modal.base_price
     additional_services = []
     list_add_services = []
     add_services_price = {}
+    storage = {}
+    transporting = {}
+    publish = {}
     filling_modal_add_services = AdditionalServices.query.filter_by(type_package=id.split('-')[0]).all()
+    filling_modal_storage = ResultStorage.query.all()
+    filling_modal_transporting = Transporting.query.all()
+    filling_modal_publish = Publish.query.all()
     j = 0
+
     for add_service in filling_modal_add_services:
         list_add_services.append(add_service.add_service)
         add_services_price[f'filename_{j}'] = add_service.add_price
         j = j + 1
+    for item in filling_modal_storage:
+        storage[str(item.id)] = [item.res_storage, item.res_price]
+    for item in filling_modal_transporting:
+        transporting[str(item.id)] = [item.text_trp, item.trp_price]
+    for item in filling_modal_publish:
+        publish[str(item.id)] = [item.text_pub, item.pub_price]
 
     form = file_list_form_builder(list_add_services)
 
@@ -81,8 +95,8 @@ def modal(id):
         return jsonify(data)
     return render_template('_order_form.html', title=f'Вы выбрали "{filling_modal.type_name}", пакет "{filling_modal.rus_name}"',
                            form=form, add_serv=additional_services,
-                           base_add=services_base,
-                           add_prices=add_services_price)
+                           base_add=services_base, add_prices=add_services_price,
+                           storage=storage, transporting=transporting, publish=publish, base_price=base_price)
 
 def add_to_database(data, package_name, form):
     add_services = ''
@@ -102,14 +116,15 @@ def send_email(data, package_name, add_services):
     msg = f'''
     У вас новый заказ на сайте WeddingPrice.ru
     -------------------------------------------
-    * Имя пакета: {package_name};
+    * Вы выбрали пакет: {package_name};
     * Дополнительные услуги, выбранные по желанию:
-        {add_services};
+        {add_services}
     * Дата свадьбы: {data['wedding_date']};
     * Хранение результатов: {'1 месяц' if data['result_storage'] == '0' else 'бессрочное хранение'}
     * Перемещение: {'молодожены предоставляют машину' if data['transporting'] == '0' else 'фотограф перемещается на своей машине'}  
     * Разрешение на публикацию: {'не разрешаю' if data['permission_to_publish'] == '0' else 'разрешаю'}
-    * Комментарий к заказу: {data['comments']}  
+    * Комментарий к заказу: {data['comments']}
+    * Цена за услугу: {data['hidden_price']}  
     -------------------------------------------
     КОНТАКТЫ:
     {data['username']} - {data['phone']}

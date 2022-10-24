@@ -17,8 +17,8 @@
 
           {% for service in add_serv %}
             <li class="additional-services__list-item">
-              {{ form[service](data_price=add_prices[form[service].id]) }}
-              {{ form[service].label }}
+              {{ form[service](onchange="checkbox_click(this)", data_price=add_prices[form[service].id]) }}
+              {{ form[service].label(data_textprice='+ ' + add_prices[form[service].id]|string + ' ₽') }}
             </li>
           {% endfor %}
 
@@ -30,7 +30,7 @@
         <ul class="results-storage__radio-list">
           {% for subfield in form.result_storage %}
             <li class="results-storage__radio-item">
-              <p>{{ subfield }} {{ subfield.label }}</p>
+              <p>{{ subfield(onchange="radio_click(this)", data_price=storage[subfield.id[-1]][1]) }} {{ subfield.label(data_textprice='+ ' + storage[subfield.id[-1]][1]|string + ' ₽') }}</p>
             </li>
           {% endfor %}
         </ul>
@@ -40,7 +40,7 @@
         <ul class="transporting__list">
           {% for subfield in form.transporting %}
             <li class="transporting__list-item">
-              <p>{{ subfield }} {{ subfield.label }}</p>
+              <p>{{ subfield(onchange="radio_click(this)", data_price=transporting[subfield.id[-1]][1]) }} {{ subfield.label(data_textprice='+ ' + transporting[subfield.id[-1]][1]|string + ' ₽') }}</p>
             </li>
           {% endfor %}
         </ul>
@@ -50,7 +50,7 @@
         <ul class="permission-to-publish__list">
           {% for subfield in form.permission_to_publish %}
           <li class="permission-to-publish__list-item">
-            <p>{{ subfield }} {{ subfield.label }}</p>
+            <p>{{ subfield(onchange="radio_click(this)", data_price=publish[subfield.id[-1]][1]) }} {{ subfield.label(data_textprice='+ ' + publish[subfield.id[-1]][1]|string + ' ₽') }}</p>
           </li>
           {% endfor %}
         </ul>
@@ -63,6 +63,32 @@
       {{ form.wedding_date(class_='form-input', inputmode="date") }}
       {{ form.comments.label(class_='personal-data') }}
       {{ form.comments(class_='order-comments', placeholder_="Комментарий к заказу", inputmode="text") }}
-      {{ form.submit(class_='form-button') }}
+      {{ form.hidden_price }}
+      <div class="result-container">
+        {{ form.submit(class_='form-button') }}
+        <div class="result__price">Итоговая стоимость: <p>{{ base_price }}</p> ₽</div>
+      </div>
+      
+
 </form>
 <div class="close-form">X</div>
+
+<script>
+  radio_list = document.querySelectorAll('input[type=radio]')
+  storage_price_old = Number
+  transport_price_old = Number
+  publish_price_old = Number
+  for (const key in radio_list) {
+    if (Object.hasOwnProperty.call(radio_list, key)) {
+      radio = radio_list[key]
+      if (radio.id.includes('storage') && radio.checked) {        
+        storage_price_old = Number(radio.dataset.price)
+      } else if (radio.id.includes('transporting') && radio.checked) {        
+        transport_price_old = Number(radio.dataset.price)
+      } else if (radio.id.includes('publish') && radio.checked) {       
+        publish_price_old = Number(radio.dataset.price)
+      }       
+    }
+  }
+
+</script>

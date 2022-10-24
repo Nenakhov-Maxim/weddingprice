@@ -174,9 +174,10 @@ $(document).ready(function (e) {
             $('.close-form').click(function () {
                 $('#Modal').removeClass('active');
                 
-            });
+            });              
         $('.form-button').click(function (event) {
-                event.preventDefault();
+                event.preventDefault();                
+                $("#hidden_price")[0].value = $('.result__price p').html();                              
                 $.post(url, data = $('.order-form__value').serialize())
                   .done(function (data) {                 
                     var f_inp = $('.form-input');                 
@@ -226,3 +227,29 @@ $(document).on('mousedown touchstart', function (e) {
         }
     }
 });
+
+//Регаирование на чекбоксы в форме заказа
+
+function checkbox_click(item){
+    result_price_old = document.querySelector('.result__price p').innerHTML
+    if (item.checked) {
+        document.querySelector('.result__price p').innerHTML = String(Number(result_price_old) + Number(item.dataset.price))
+    } else  {
+        document.querySelector('.result__price p').innerHTML = String(Number(result_price_old) - Number(item.dataset.price))
+    }
+
+}
+
+function radio_click(item) {
+  result_price_old = document.querySelector('.result__price p').innerHTML
+  if (item.id.includes('storage')) {
+    document.querySelector('.result__price p').innerHTML = String(Number(result_price_old) + Number(item.dataset.price) - storage_price_old)
+    storage_price_old = Number(item.dataset.price)
+  } else if (item.id.includes('transporting')) {
+    document.querySelector('.result__price p').innerHTML = String(Number(result_price_old) + Number(item.dataset.price) - transport_price_old)
+    transport_price_old = Number(item.dataset.price)
+  } else if (item.id.includes('publish')) {
+    document.querySelector('.result__price p').innerHTML = String(Number(result_price_old) + Number(item.dataset.price) - publish_price_old)
+    publish_price_old = Number(item.dataset.price)    
+  }
+}

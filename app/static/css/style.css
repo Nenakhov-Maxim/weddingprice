@@ -509,7 +509,7 @@
   line-height: 34px;
   border-radius: 6px;
   margin-bottom: 40px;
-  margin: 0 auto 40px;
+  
 }
 
 .form-button:hover {
@@ -583,6 +583,22 @@ button:hover {
   margin-bottom: 20px;
 }
 
+.additional-services__list-item label {
+  position: relative;
+}
+
+.additional-services__list-item label::before {
+  position: absolute;
+  content: attr(data-textprice);
+  width: 100px;
+  height: 25px;
+  background-color: #D5EBF2;
+  opacity: .6;
+  right: -110px;  
+  text-align: center;
+  border-radius: 6px;
+}
+
 .results-storage {
   margin-bottom: 20px;
 }
@@ -608,6 +624,26 @@ button:hover {
   color: #4F4F4F;
 }
 
+.results-storage__radio-item {
+ margin-bottom: 10px;
+}
+
+.results-storage__radio-item label  {
+  position: relative;
+}
+
+.results-storage__radio-item label::before {
+  position: absolute;
+  content: attr(data-textprice);
+  width: 100px;
+  height: 25px;
+  background-color: #D5EBF2;
+  opacity: .6;
+  right: -110px;  
+  text-align: center;
+  border-radius: 6px;
+}
+
 .transporting {
   margin-bottom: 20px;
 }
@@ -622,6 +658,27 @@ button:hover {
   color: #4F4F4F;
 }
 
+.transporting__list-item {
+  margin-bottom: 10px;
+}
+
+.transporting__list-item label {
+  position: relative;
+}
+
+.transporting__list-item label::before {
+  position: absolute;
+  content: attr(data-textprice);
+  width: 100px;
+  height: 25px;
+  background-color: #D5EBF2;
+  opacity: .6;
+  right: -110px;  
+  text-align: center;
+  border-radius: 6px;
+}
+
+
 .permission-to-publish {
   margin-bottom: 20px;
 }
@@ -634,6 +691,26 @@ button:hover {
   font-size: 18px;
   line-height: 25px;
   color: #4F4F4F; 
+}
+
+.permission-to-publish__list-item {
+  margin-bottom: 10px;
+}
+
+.permission-to-publish__list-item label{
+  position: relative;
+}
+
+.permission-to-publish__list-item label::before{
+  position: absolute;
+  content: attr(data-textprice);
+  width: 100px;
+  height: 25px;
+  background-color: #D5EBF2;
+  opacity: .6;
+  right: -110px;  
+  text-align: center;
+  border-radius: 6px;
 }
 
 .personal-data {  
@@ -656,6 +733,30 @@ button:hover {
   min-height: 80px;
   max-height: 80px;
   margin: 0 auto 41px
+}
+
+.result-container {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.result__price {
+  margin-left: 30px;  
+  color: #AA8D78;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 40px;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 22px;
+  line-height: 34px;
+}
+
+.result__price p {
+  display: inline-block;
 }
 
 .disable {
