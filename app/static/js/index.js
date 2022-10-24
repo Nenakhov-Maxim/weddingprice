@@ -8,13 +8,11 @@ for (const item in menu) {
   if (Object.hasOwnProperty.call(menu, item)) {
     const menu_item = menu[item];
     menu_item.addEventListener('click', function(e){
-      event.preventDefault();
-      to_elem = e
+      event.preventDefault();      
       if(navigator.userAgent.includes("Mac")){
-          
           scrollToElement(e.toElement.parentElement)
       } else {
-          scrollToElement(e.path[1])
+          scrollToElement(e.target.parentElement)
       }
     })
   }

@@ -31,19 +31,24 @@ def index():
         base_price_photo_video.append(row[0])
 
     photo_path = os.getcwd() + "/app/static/gallery/photo"
-    video_path = os.getcwd() + "/app/static/gallery/video"
     list_of_photo = {}
-    list_of_video = {}
+    list_of_video = {'01': ['Свадебный танец Анастасии и Владимира', 'fF-8cI1q4nI'],
+                     '02': ['Свадебный танец Марии и Дмитрия', 'YK_OzBS475U'],
+                     '03': ['Свадебный танец Сергея и Алины', 'W-XenKNfUkU'],
+                     '04': ['Свадьба Александры и Андрея', 'CWAUzFD6pc4'],
+                     '05': ['Свадьба Анны и Михаила', 'IyONef0BtC0'],
+                     '06': ['Свадьба Вадима и Гульназ', 'fbzreASoTKk'],
+                     '07': ['Свадьба Дианы и Игоря', 'EiKd4ZNCBGs'],
+                     '08': ['Свадьба Ксении и Антона', 'K2CBUdhdnZw'],
+                     '09': ['Свадьба Натальи и Никиты', 'baNedq7KR54'],
+                     '10': ['Свадьба Светланы и Александра', 'DuZiyuJCSmk'],
+                     '11': ['Свадьба Сергея и Екатерины', 'SS3g_Q946kM'],
+                     '12': ['Свадьба Юлии и Даниила', 'C_-C_6SHQ7g'],
+                     '13': ['Свадьба Юлии и Кирилла', 'hhKQUhA_F9U']}
     for filename in os.listdir(photo_path):
         list_of_photo[filename] = "gallery/photo/" + filename
-    for filename in os.listdir(video_path):
-        alt = filename.split(',')[0]
-        url_code = filename.split(',')[1][:-4].strip()
-        list_of_video[url_code] = ["gallery/video/" + filename, alt]
-    print(list_of_video)
 
-
-    return render_template('index.html', title='Wedding Photographer', base_price_photo=base_price_photo,
+    return render_template('index.html', title='Wedding Price', base_price_photo=base_price_photo,
                            base_price_video=base_price_video, base_price_photo_video=base_price_photo_video,
                            photo=list_of_photo, video=list_of_video)
 
@@ -112,13 +117,13 @@ def send_email(data, package_name, add_services):
 
     HOST = "server152.hosting.reg.ru"
     SUBJECT = 'Поступил новый заказ через форму сайта'
-    TO = 'nenakhov.max@yandex.ru'
+    TO = ['nenakhov.max@yandex.ru', 'trg1101@yandex.ru', 'STS_71@mail.ru']
     FROM = 'order@weddingprice.ru'
     BODY = '\r\n'.join(("From: %s" % FROM, "To: %s" % TO, "Subject: %s" % SUBJECT, "", msg))
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(HOST, 465, context=context) as server:
         server.login('order@weddingprice.ru', "55369100Max")
-        server.sendmail(FROM, [TO], BODY.encode('utf-8'))
+        server.sendmail(FROM, TO, BODY.encode('utf-8'))
         
     
         
