@@ -78,7 +78,7 @@
 
   .active_nav {
     display: flex;
-    height: 415px;
+    height: 440px;
     align-items: flex-start;
     z-index: 4;
     
@@ -122,61 +122,47 @@
 
   .img-bottom img {
     height: auto;
-    width: calc(250px + (550 - 250) * ((100vw - 370px) / (799 - 370)));
-    /*min-width: 250px;
-    */
+    width: calc(250px + (503 - 250) * ((100vw - 370px) / (799 - 370)));  
+    min-width: 350px;  
+  }
+
+  .additional-services__list-item label::after {      
+    position: sticky;
+    display: block;
+    width: calc(70px + (100 - 70) * ((100vw - 722px) / (1440 - 722)));
+    font-size: calc(16px + (18 - 16) * ((100vw - 722px) / (1440 - 722)));    
+    min-width: 70px;
+  }
+  .results-storage__radio-item label::after {
+    width: calc(70px + (100 - 70) * ((100vw - 722px) / (1440 - 722)));
+    font-size: calc(16px + (18 - 16) * ((100vw - 722px) / (1440 - 722)));
+    position: sticky;
+    display: block;
+    min-width: 70px;    
+  }
+  .transporting__list-item label::after {
+    width: calc(70px + (100 - 70) * ((100vw - 722px) / (1440 - 722)));
+    font-size: calc(16px + (18 - 16) * ((100vw - 722px) / (1440 - 722)));
+    position: sticky;
+    display: block;
+    min-width: 70px;
+  }
+
+  .permission-to-publish__list-item label::after {
+    width: calc(70px + (100 - 70) * ((100vw - 722px) / (1440 - 722)));
+    font-size: calc(16px + (18 - 16) * ((100vw - 722px) / (1440 - 722)));
+    position: sticky;
+    display: block;
+    min-width: 70px;
   }
   
 
 }
 
 @media (max-width: 639px)  {
-  .standart, .mini, .full-day  {
-    position: relative;
-  }
-
   .header {
     background-image: url('../img/header-bck-670px.jpg');
-   }
-
-  .mini::after {
-    position: absolute;
-    content: '';
-    background-image: url(../img/M.png);
-    width: 125px;
-    height: 211px;
-    right: 0;
-    top: 0;
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-right: 3px;
-  }
-
-  .standart::before {
-    position: absolute;
-    content: '';
-    background-image: url(../img/S.png);
-    width: 125px;
-    height: 211px;
-    left: 0;
-    top: 0;
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-right: 3px;
-  }
-
-  .full-day::after {
-    position: absolute;
-    content: '';
-    background-image: url(../img/FD.png);
-    width: 125px;
-    height: 211px;
-    right: 0;
-    top: 0;
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-right: 3px;
-  }
+   } 
 
   .package__container  {
     position: relative;

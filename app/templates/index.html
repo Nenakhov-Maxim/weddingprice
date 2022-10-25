@@ -40,9 +40,6 @@
   </section>
   <div class="content">
     <section class="header" id="index">
-      <div class="header-quote">
-        Ловлю мгновения. Сохраняю воспоминания. Тепло. Уютно. Навсегда.
-      </div>
     </section>
     <section class="photo-price" id="photo">
       <div class="photo-price__title-container">
@@ -66,7 +63,7 @@
               <ul class="content-services__list-item">
                 <li class="content-services__item">До 4 часов работы фотографа</li>
                 <li class="content-services__item">Материал предоставляется через ссылку на Яндекс.Диск</li>
-                <li class="content-services__item">Срок предоставления результатов работы - 1 неделя</li>
+                <li class="content-services__item">Срок предоставления результатов работы - 1-2 недели</li>
               </ul>
             </div>
             <div class="package__content-price">Стоимость {{ base_price_photo[0] }} ₽</div>
@@ -276,27 +273,24 @@
         </div>
         <div class="contact__phone">
           <ul class="phone-list">
-            <li class="phone-list__item"><a href="tel:+79127769862">+7(912)-776-98-62 - Татьяна</a></li>
-            <li class="phone-list__item"><a href="tel:+79517816582">+7(951)-781-65-82 - Анастасия</a></li>
+            <li class="phone-list__item"><a href="tel:+79127769862">+7(912)-776-98-62 - фотограф Татьяна</a></li>
+            <li class="phone-list__item"><a href="tel:+79517816582">+7(951)-781-65-82 - видеограф Анастасия</a></li>
           </ul>              
         </div>
         <div class="contact__vk">
           <ul class="vk-list">
-            <li class="vk-list__item"><p class="vk">VK</p><a href="https://vk.com/poto71">Татьяна</a></li>
-            <li class="vk-list__item"><p class="vk">VK</p><a href="https://vk.com/trg1101">Анастасия</a></li>
+            <li class="vk-list__item"><p class="vk">VK</p><a href="https://vk.com/poto71">фотограф Татьяна</a></li>
+            <li class="vk-list__item"><p class="vk">VK</p><a href="https://vk.com/trg1101">видеограф Анастасия</a></li>
           </ul>
         </div>
         <div class="contact__img img-bottom">
           <picture>
             <source media="(max-width: 799px)" srcset="{{ url_for('static', filename='img/img_bottom_phone.png')}}">
-            <source media="(min-width: 800px)" srcset="{{ url_for('static', filename='img/contact_photo_bottom.png')}}">
-            <img src="{{ url_for('static', filename='img/contact_photo_bottom.png')}}" alt="Контакты">
+            <source media="(min-width: 800px)" srcset="{{ url_for('static', filename='img/contact_photo_bottom.jpg')}}">
+            <img src="{{ url_for('static', filename='img/contact_photo_bottom.jpg')}}" alt="Контакты">
            </picture>         
         </div>
       </div>
-      <div class="contact__img img-right">
-        <img src="{{ url_for('static', filename='img/contact_photo_right.png')}}" alt="Контакты" srcset="">
-      </div>     
     </section>
   </div>  
  </div>

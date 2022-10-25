@@ -1,4 +1,5 @@
 <form class="order-form__value" action="" method="post" novalidate>
+  <div class="close-form">X</div>
     <h2 class="form-title">{{ title }}</h2>
       {{ form.hidden_tag() }}
       <h3>В ваш свадебный пакет включено</h3>
@@ -55,6 +56,9 @@
           {% endfor %}
         </ul>
       </div>
+      <div class="result-container">        
+        <div class="result__price">Итоговая стоимость: <p>{{ base_price }}</p> ₽</div>
+      </div>
       {{ form.username.label(class_='personal-data') }}
       {{ form.username(class_='form-input', placeholder_='Ваше имя', inputmode="text") }}
       {{ form.phone.label(class_='personal-data') }}
@@ -64,14 +68,12 @@
       {{ form.comments.label(class_='personal-data') }}
       {{ form.comments(class_='order-comments', placeholder_="Комментарий к заказу", inputmode="text") }}
       {{ form.hidden_price }}
-      <div class="result-container">
-        {{ form.submit(class_='form-button') }}
-        <div class="result__price">Итоговая стоимость: <p>{{ base_price }}</p> ₽</div>
-      </div>
+      {{ form.submit(class_='form-button') }}
+      
       
 
 </form>
-<div class="close-form">X</div>
+
 
 <script>
   radio_list = document.querySelectorAll('input[type=radio]')
