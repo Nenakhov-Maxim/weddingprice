@@ -38,7 +38,7 @@
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 800px) and (orientation:portrait), (orientation:landscape) and (min-height: 626px) {
   .title-wrapper {
     display: none;
   }
@@ -47,7 +47,11 @@
   }
 }
 
-@media (max-width: 799px) {
+@media (max-width: 799px), (orientation:landscape) and (max-height: 625px) {
+  .main-menu__menu-item  {
+    margin-bottom: 16px;
+  }
+
   .main-menu__inner {
     display: none;
   }
@@ -86,7 +90,7 @@
 
   .active_nav .title-wrapper {
     padding-bottom: 14px;
-    margin-bottom: 55px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #AA8D78;
   }
 
@@ -121,9 +125,8 @@
   }
 
   .img-bottom img {
-    height: auto;
-    width: calc(250px + (503 - 250) * ((100vw - 370px) / (799 - 370)));  
-    min-width: 350px;  
+    max-width: 800px;
+    width: calc(290px + (800 - 290) * ((100vw - 370px) / (800 - 370)));;          
   }
 
   .additional-services__list-item label::after {      
@@ -167,6 +170,7 @@
   .package__container  {
     position: relative;
     display: block;
+    margin-bottom: calc(50px + (130 - 50) * ((100vw - 370px) / (1440 - 370)));;
   }
 
   .photo-price__package {
@@ -182,9 +186,12 @@
     text-align: center;
   }
   .package__content-services {
-    text-align: center;
     margin-right: auto;
+    padding: 0 15px 0 15px;
+    text-align: left;
+    font-size: calc(17px + (20 - 17) * ((100vw - 370px) / (1440 - 370)));
   }
+  
   .standart .package__photo {
     margin: 0 0 0 auto;
   }
@@ -195,10 +202,10 @@
     text-align: center;
   }
 
-  .standart .package__content-services {
+ /* .standart .package__content-services {
     text-align: center;
     margin-left: 0;
-  }
+  }*/
 
   .contact__content {
     align-items: center;
@@ -210,6 +217,7 @@
 
   .contact__phone  {
     padding-left: 0;
+    font-size: 20px;
   }
 
   .contact__vk  {
@@ -234,5 +242,36 @@
   }
   .full-day::after {
     width: calc(60px + 65 * (100vw / 1440));
+  }
+  .phone-list__item::before  {
+    display: none;
+  }
+  .contact__phone  {
+    text-align: left;
+  }
+  .contact__vk  {
+    text-align: left;
+    padding-left: 5px;
+  }
+}
+
+@media all and (orientation:landscape) {
+  
+  .img-bottom img {
+    max-width: 770px;
+    width: calc(450px + (770 - 450) * ((100vw - 800px) / (1440 - 800)));
+  }
+  
+}
+
+@media (max-height: 550px) {
+  .img-bottom {
+    display: none;
+  }
+}
+
+@media (max-aspect-ratio: 15/16) and (max-width: 799px) {
+  .active_nav {
+    height: 360px;
   }
 }

@@ -15,14 +15,12 @@
       <div class="additional-services">
         <h3 class="additional-services__title">Дополнительные услуги</h3>
         <ul class="additional-services__list">
-
           {% for service in add_serv %}
             <li class="additional-services__list-item">
               {{ form[service](onchange="checkbox_click(this)", data_price=add_prices[form[service].id]) }}
               {{ form[service].label(data_textprice='+ ' + add_prices[form[service].id]|string + ' ₽') }}
             </li>
           {% endfor %}
-
         </ul>
       </div>
       <div class="results-storage">
@@ -36,7 +34,11 @@
           {% endfor %}
         </ul>
       </div>
+      {% if is_photo_package %}
       <div class="transporting">
+      {% else %}
+      <div class="transporting" style="display: none;">
+      {% endif %}    
         <h3 class="transporting__title">На чем перемещается фотограф с места на место?</h3>
         <ul class="transporting__list">
           {% for subfield in form.transporting %}
@@ -69,9 +71,6 @@
       {{ form.comments(class_='order-comments', placeholder_="Комментарий к заказу", inputmode="text") }}
       {{ form.hidden_price }}
       {{ form.submit(class_='form-button') }}
-      
-      
-
 </form>
 
 
@@ -92,5 +91,4 @@
       }       
     }
   }
-
 </script>

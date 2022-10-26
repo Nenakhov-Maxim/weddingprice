@@ -8,12 +8,8 @@ for (const item in menu) {
   if (Object.hasOwnProperty.call(menu, item)) {
     const menu_item = menu[item];
     menu_item.addEventListener('click', function(e){
-      event.preventDefault();      
-      if(navigator.userAgent.includes("Mac")){
-          scrollToElement(e.toElement.parentElement)
-      } else {
-          scrollToElement(e.target.parentElement)
-      }
+      event.preventDefault();
+      scrollToElement(e.target.parentElement)
     })
   }
 }
@@ -154,7 +150,7 @@ menu_mini.addEventListener('click', ()=> {
 //изменения сайта при изменении экрана
 
 window.addEventListener('resize', ()=>{ 
-  if(window.screen.width >= 800){
+  if(window.screen.width >= 800 && window.screen.height >= 626){
     document.querySelector('.main-menu__inner').style.display = 'flex';
   } else {
     document.querySelector('.main-menu__inner').style.display = null;

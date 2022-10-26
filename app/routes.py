@@ -93,10 +93,13 @@ def modal(id):
     else:
         data = json.dumps(form.errors, ensure_ascii=False)
         return jsonify(data)
+
+    is_photo_package = True if 'photo' in filling_modal.package_name else False
     return render_template('_order_form.html', title=f'Вы выбрали "{filling_modal.type_name}", пакет "{filling_modal.rus_name}"',
                            form=form, add_serv=additional_services,
                            base_add=services_base, add_prices=add_services_price,
-                           storage=storage, transporting=transporting, publish=publish, base_price=base_price)
+                           storage=storage, transporting=transporting, publish=publish, base_price=base_price,
+                           is_photo_package=is_photo_package)
 
 def add_to_database(data, package_name, form):
     add_services = ''
