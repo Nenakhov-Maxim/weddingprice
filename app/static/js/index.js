@@ -84,16 +84,13 @@ for (const item in menu) {
 
  */
  jQuery(($) => {
-
   const section = $("section");
   const nav = $(".main-menu__menu-item");
   const navHeight = nav.outerHeight(); // получаем высоту навигации
-
   // поворот экрана
   window.addEventListener("orientationchange", () => {
       const navHeight = nav.outerHeight();
   }, false);
-  
   $(window).on("scroll", () => {
       const position = $(this).scrollTop();    
       section.each(function () {
@@ -143,8 +140,7 @@ menu_mini.addEventListener('click', ()=> {
     document.querySelector('.main-menu__inner').style.display = 'flex';    
   } else {
     document.querySelector('.main-menu__inner').style.display = 'none';    
-  }; 
-  
+  };
 });
 
 //изменения сайта при изменении экрана
@@ -161,7 +157,6 @@ window.addEventListener('resize', ()=>{
 
 $(document).ready(function (e) {
     $('.edit-modal-opener').click(function () {
-        
         var url = $(this).data('whatever');
         $.get(url, function (data) {
           $('#Modal .order-form__container').html('');
@@ -169,7 +164,6 @@ $(document).ready(function (e) {
             $('#Modal').addClass('active');
             $('.close-form').click(function () {
                 $('#Modal').removeClass('active');
-                
             });              
         $('.form-button').click(function (event) {
                 event.preventDefault();                
@@ -181,41 +175,42 @@ $(document).ready(function (e) {
                       f_inp[i].classList.remove('has-error');
                     }
                     if (data.status == 'ok') {
-                        console.log(data.mail)
                         $('#Modal').removeClass('active').delay( 3800 );
                         location.reload();
                     } else {
-                        
                         var obj = JSON.parse(data);
-                        console.log(obj)
+                        if ($('p.help-block')) {
+                            $('p.help-block').remove();
+                        }
                         for (var key in obj) {
                             if (obj.hasOwnProperty(key)) {
                                 var value = obj[key];
                             }
-                            $('<p class="help-block">' + value + '</p>')
-                            .insertBefore('#' + key);
-                            $('#' + key).addClass('has-error')
+                            for (let i = 0; i < value.length; i++) {
+                              const element = value[i];
+                              $('<p class="help-block">' + element + '</p>')
+                              .insertBefore('#' + key);
+                              $('#' + key).addClass('has-error')
+                            }
                         }
                     }
                   })
                   .fail(function(xhr, status, error) {
                     console.log(xhr, status, error)
                 });
-
             });
         })
-
     });
 });
 
 $('.package__content-order').click(function(event){
   event.preventDefault()
 })
+
 // Скрытие меню при клике в другую область на небольших экранах
 
 $(document).on('mousedown touchstart', function (e) {
     if(window.screen.width < 800){
-        
         var container = $(".active_nav");
         if (container.has(e.target).length === 0){
             document.querySelector('.main-menu__inner').style.display = 'none';
@@ -224,7 +219,7 @@ $(document).on('mousedown touchstart', function (e) {
     }
 });
 
-//Регаирование на чекбоксы в форме заказа
+//Реагирование на чекбоксы в форме заказа
 
 function checkbox_click(item){
     result_price_old = document.querySelector('.result__price p').innerHTML
@@ -233,7 +228,6 @@ function checkbox_click(item){
     } else  {
         document.querySelector('.result__price p').innerHTML = String(Number(result_price_old) - Number(item.dataset.price))
     }
-
 }
 
 function radio_click(item) {

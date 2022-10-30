@@ -6,3 +6,8 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    EMAIL_LOGIN = 'order@weddingprice.ru'
+    EMAIL_PASSWORD = '55369100Max'
+    HOST = "server152.hosting.reg.ru"
+    TELEGRAM_chat_id = "-1001838710767"
+    bot_access_token = "5692158136:AAGaP-CReaNsGXlPEwKJHPGKviqd5FhScKI"

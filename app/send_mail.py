@@ -1,17 +1,21 @@
-import smtplib
+import smtplib, ssl
+from config import Config
 
-class SendMail():
+
+class SendMail:
     def __init__(self, text):
-        self.HOST = "mail.weddingprice.ru"
+        conf = Config
+        self.HOST = conf.HOST
+        self.email_login = conf.EMAIL_LOGIN
+        self.host_psw = conf.EMAIL_PASSWORD
         self.SUBJECT = 'Поступил новый заказ через форму сайта'
-        self.TO = 'Nenakhov.Max@yandex.ru'
+        self.TO = ['nenakhov.max@yandex.ru'] #, 'trg1101@yandex.ru', 'STS_71@mail.ru'
         self.FROM = 'order@weddingprice.ru'
         self.text = text
         self.BODY = '\r\n'.join(("From: %s" % self.FROM, "To: %s" % self.TO, "Subject: %s" % self.SUBJECT, "", self.text))
-        self.send_mail()
+        self.context = ssl.create_default_context()
 
     def send_mail(self):
-        server = smtplib.SMTP(self.HOST)
-        server.login('order@weddingprice.ru', "55369100Max")
-        server.sendmail(self.FROM, [self.TO], self.BODY.encode('utf-8'))
-        server.quit()
+        with smtplib.SMTP_SSL(self.HOST, 465, context=self.context) as server:
+            server.login(self.email_login, self.host_psw)
+            server.sendmail(self.FROM, self.TO, self.BODY.encode('utf-8'))

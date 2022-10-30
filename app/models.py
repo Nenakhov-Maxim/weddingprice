@@ -1,12 +1,6 @@
 from app import db
 from datetime import datetime
 
-# class TypeOfShooting(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     package_id = db.Column(db.String(64), db.ForeignKey('package.id'))
-#
-#     def __repr__(self):
-#         return '<ID пакета: {}>'.format(self.package_id)
 
 class Package(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,11 +11,11 @@ class Package(db.Model):
     base_price = db.Column(db.Integer)
     type = db.Column(db.String(1000))
 
-
     def __repr__(self):
         return f'<Имя пакета: {self.rus_name}>,' \
                f'<Базовые услуги: {self.base_service}>,' \
                f'<Базовая стоимость: {self.base_price}>'
+
 
 class AdditionalServices(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -32,6 +26,7 @@ class AdditionalServices(db.Model):
     def __repr__(self):
         return f'<Услуга: {self.add_service}>,' \
                f'<Cтоимость: {self.add_price}>'
+
 
 class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -55,6 +50,7 @@ class ResultStorage(db.Model):
         return f'<Услуга: {self.res_storage}>,' \
                f'<Cтоимость: {self.res_price}>'
 
+
 class Transporting(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text_trp = db.Column(db.String(1000))
@@ -63,6 +59,8 @@ class Transporting(db.Model):
     def __repr__(self):
         return f'<Услуга: {self.text_trp}>,' \
                f'<Cтоимость: {self.trp_price}>'
+
+
 class Publish(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text_pub = db.Column(db.String(1000))

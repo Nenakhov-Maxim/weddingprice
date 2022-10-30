@@ -1,11 +1,13 @@
 import json
-import email, smtplib, ssl
 from flask import render_template, url_for, redirect, flash, jsonify, request
 from app.forms import file_list_form_builder
 from app import application, db
 from app.models import Package, AdditionalServices, Orders, ResultStorage, Transporting, Publish
+from app.send_telegram import WeddingBot
+from app.send_mail import SendMail
 import os
-
+import re
+import datetime
 
 
 @application.shell_context_processor
@@ -45,12 +47,14 @@ def index():
                      '11': ['Свадьба Сергея и Екатерины', 'SS3g_Q946kM'],
                      '12': ['Свадьба Юлии и Даниила', 'C_-C_6SHQ7g'],
                      '13': ['Свадьба Юлии и Кирилла', 'hhKQUhA_F9U']}
+
     for filename in os.listdir(photo_path):
         list_of_photo[filename] = "gallery/photo/" + filename
 
     return render_template('index.html', title='Wedding Price', base_price_photo=base_price_photo,
                            base_price_video=base_price_video, base_price_photo_video=base_price_photo_video,
                            photo=list_of_photo, video=list_of_video)
+
 
 @application.route('/index/<id>/order', methods=['GET', 'POST'])
 def modal(id):
@@ -86,8 +90,14 @@ def modal(id):
         additional_services.append(f'filename_{i}')
 
     if form.validate_on_submit():
-        add_to_database(form.data, id, form)
-        return jsonify(status='ok')
+        result = validate_base_field(form.data)
+        if len(result) >= 1:
+            data = json.dumps(result, ensure_ascii=False)
+            return jsonify(data)
+        else:
+            add_to_database(form.data, id, form)
+            return jsonify(status='ok')
+
     elif request.method == 'GET':
         pass
     else:
@@ -101,11 +111,12 @@ def modal(id):
                            storage=storage, transporting=transporting, publish=publish, base_price=base_price,
                            is_photo_package=is_photo_package)
 
+
 def add_to_database(data, package_name, form):
-    add_services = ''
+    add_services = '\n'
     for item in data.items():
         if item[0].find('filename') != -1 and item[1] != False:
-            add_services = add_services + form[item[0]].label.text + ';' + '\n'
+            add_services = add_services + '\t- ' + form[item[0]].label.text + ';' + '\n'
 
     order = Orders(package_name=package_name, add_services=add_services, name=data['username'], phone=data['phone'],
                    wed_date=data['wedding_date'], comments=data['comments'], results_storage=int(data['result_storage']),
@@ -113,15 +124,14 @@ def add_to_database(data, package_name, form):
     db.session.add(order)
     db.session.commit()
     send_email(data, package_name, add_services)
-    
+
     
 def send_email(data, package_name, add_services):
     msg = f'''
     У вас новый заказ на сайте WeddingPrice.ru
     -------------------------------------------
     * Вы выбрали пакет: {package_name};
-    * Дополнительные услуги, выбранные по желанию:
-        {add_services}
+    * Дополнительные услуги, выбранные по желанию: {add_services if len(add_services) > 0 else 'Дополнительные услуги не выбраны'}
     * Дата свадьбы: {data['wedding_date']};
     * Хранение результатов: {'1 месяц' if data['result_storage'] == '0' else 'бессрочное хранение'}
     * Перемещение: {'молодожены предоставляют машину' if data['transporting'] == '0' else 'фотограф перемещается на своей машине'}  
@@ -132,16 +142,21 @@ def send_email(data, package_name, add_services):
     КОНТАКТЫ:
     {data['username']} - {data['phone']}
     '''
+    mail = SendMail(msg)
+    bot = WeddingBot()
+    bot.public_post(msg)
+    mail.send_mail()
 
-    HOST = "server152.hosting.reg.ru"
-    SUBJECT = 'Поступил новый заказ через форму сайта'
-    TO = ['nenakhov.max@yandex.ru', 'trg1101@yandex.ru', 'STS_71@mail.ru']
-    FROM = 'order@weddingprice.ru'
-    BODY = '\r\n'.join(("From: %s" % FROM, "To: %s" % TO, "Subject: %s" % SUBJECT, "", msg))
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(HOST, 465, context=context) as server:
-        server.login('order@weddingprice.ru', "55369100Max")
-        server.sendmail(FROM, TO, BODY.encode('utf-8'))
-        
-    
-        
+
+def validate_base_field(data):
+    phone = data['phone']
+    wed_date = data['wedding_date']
+    date_now = datetime.date.today()
+    match_phone = re.search(r'(?:\+7|8|7)\d{7,}', str(phone))
+    errors = {}
+    if date_now >= wed_date:
+        errors['wedding_date'] = ['Дата свадьбы не может быть раньше текущей даты']
+    if match_phone == None:
+        errors['phone'] = ['Неверный формат номера телефона', 'Номер должен соответствовать одному из форматов: +79998887766,'
+                                                              '79998887766, 89998887766']
+    return errors

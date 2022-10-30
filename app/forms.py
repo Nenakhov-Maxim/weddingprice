@@ -10,14 +10,12 @@ class OrderForm(FlaskForm):
                                                        ('1', 'Фотограф перемещается на своей машине')], default='0')
     permission_to_publish = RadioField('publish', choices=[('0', 'Не разрешаю'),
                                                        ('1', 'Разрешаю')], default='1')
-    username = StringField('Ваше имя', validators=[DataRequired()])
-    phone = IntegerField('Номер по которому с вами можно связаться', validators=[DataRequired()])
-    wedding_date = DateField('Какая дата съемки вас интересует?', validators=[DataRequired()])
+    username = StringField('Ваше имя', validators=[DataRequired(message="Пожалуйста, введите имя")])
+    phone = IntegerField('Номер по которому с вами можно связаться', validators=[DataRequired(message="Пожалуйста, введите ваш номер телефона")])
+    wedding_date = DateField('Какая дата съемки вас интересует?', validators=[DataRequired(message="Пожалуйста, укажите планируюмую дату свадьбы")])
     comments = TextAreaField('')
     hidden_price = HiddenField('price')
     submit = SubmitField('записаться')
-
-
 
 def file_list_form_builder(filenames):
     class FileListForm(OrderForm):
