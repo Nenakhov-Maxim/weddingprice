@@ -1,0 +1,8 @@
+# ignore all logs
+*.log
+config.py
+web.config
+info.php
+app.db
+
+
