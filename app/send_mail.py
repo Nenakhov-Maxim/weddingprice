@@ -9,7 +9,7 @@ class SendMail:
         self.email_login = conf.EMAIL_LOGIN
         self.host_psw = conf.EMAIL_PASSWORD
         self.SUBJECT = 'Поступил новый заказ через форму сайта'
-        self.TO = ['nenakhov.max@yandex.ru'] #, 'trg1101@yandex.ru', 'STS_71@mail.ru'
+        self.TO = conf.SEND_TO
         self.FROM = 'order@weddingprice.ru'
         self.text = text
         self.BODY = '\r\n'.join(("From: %s" % self.FROM, "To: %s" % self.TO, "Subject: %s" % self.SUBJECT, "", self.text))

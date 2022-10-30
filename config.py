@@ -11,3 +11,4 @@ class Config(object):
     HOST = "server152.hosting.reg.ru"
     TELEGRAM_chat_id = "-1001838710767"
     bot_access_token = "5692158136:AAGaP-CReaNsGXlPEwKJHPGKviqd5FhScKI"
+    SEND_TO = ['trg1101@yandex.ru', 'STS_71@mail.ru']
