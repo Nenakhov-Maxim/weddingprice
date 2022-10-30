@@ -1,6 +1,7 @@
-cat .gitignore
-cat old_version
-cat migrations
+.gitignore
+old_version
+migrations
+.gitignore
 .idea
 *.rbc
 capybara-*.html
