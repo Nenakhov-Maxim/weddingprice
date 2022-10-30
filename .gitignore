@@ -4,5 +4,7 @@ config.py
 web.config
 info.php
 app.db
-
-
+__pycache__
+.idea
+.gitignore
+passenger_wsgi.py
