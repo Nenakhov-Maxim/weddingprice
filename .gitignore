@@ -1,6 +1,7 @@
 cat .gitignore
 cat old_version
 cat migrations
+.idea
 *.rbc
 capybara-*.html
 .rspec

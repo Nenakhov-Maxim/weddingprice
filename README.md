@@ -1,8 +1,6 @@
 # WeddingPrice.ru
 ## Разработка сайта на Flask
 
-[![Build Status](https://app.travis-ci.com/Nenakhov-Maxim/weddingprice.svg?branch=main)](https://app.travis-ci.com/Nenakhov-Maxim/weddingprice)
-
 Веб-версия, мобильная версия, адаптив под разные экраны
 
 ## Общие сведения
